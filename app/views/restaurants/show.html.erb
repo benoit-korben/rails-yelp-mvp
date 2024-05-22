@@ -1,0 +1,19 @@
+<h1>Restaurant <%= @restaurant.name %></h1>
+<div id="restaurant">
+  <%= render @restaurant %>
+  <p><strong>Reviews</strong></p>
+  <p>Average rating : <%= @average_rating %></p>
+  <%= link_to "Add a review", new_restaurant_review_path(@restaurant, @review), class: "btn btn-primary p-2" %>
+  <ul class="list-group">
+    <% @restaurant.reviews.each do |review| %>
+      <li class="list-group-item">
+        <%= review.content %>
+        <%= link_to "Delete",
+          review_path(review),
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},
+          class: "btn-danger p-1" %>
+      </li>
+    <% end %>
+  </ul>
+  <br>
+</div>
